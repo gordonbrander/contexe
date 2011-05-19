@@ -1,41 +1,54 @@
+/**
+ * Contexe - Contextual Execution
+ * http://github.com/gordonbrander/contexe
+ * @author Gordon Brander
+ * @version 0.1
+ * Released under the terms of both MIT and GNU GPL License
+ */
 !function (context, doc) {
-	var Exe = function (element) {
-		var tmpEl,
-			el = element || 'html';
+	Contexe = function (element) {
+		/* Use your own DOM fragment, or a keyword ('body'/'html') */
+		var el = element || 'html',
+			_class = Contexe;
+		
+		/* Enforce "new" and use a Factory for the lazy that don't assign to variables. */
+		if (!(this instanceof _class)) {
+			var i = _class.ins;
+			if (typeof i[element] === 'undefined') {
+				i[element] = new _class(element);
+			};
+			return i[element];
+		};
 		
 		if (el === 'html') {
-			tmpEl = doc.getElementsByTagName('html')[0];
+			el = doc.getElementsByTagName('html')[0];
 		}
 		/* Body will only work if the body tag has already loaded. Use at bottom of page
 		or with a DOMReady utility */
 		else if (el === 'body') {
-			tmpEl = doc.getElementsByTagName('body')[0];
-		}
-		/* Use your own DOM fragment */
-		else {
-			tmpEl = element;
+			el = doc.getElementsByTagName('body')[0];
 		};
 		
-		this.el = tmpEl;
+		this.el = el;
 	};
-	Exe.prototype.hasClass = function (classname, element) {
-		var el = element || this.el,
-			classStr = el.className,
-			classes = classStr.split(' ');
-		for (var i = classes.length - 1; i >= 0; i--){
-			if (classes[i] === classname) {
-				return true;
+	Contexe.ins = [];
+	Contexe.prototype = {
+		classReg: function (c) {
+			return new RegExp("(^|\\s+)" + c + "(\\s+|$)");
+		},
+
+		hasClass: function (el, c) {
+			return this.classReg(c).test(el.className);
+		},
+		
+		given: function (classname, callback, args) {
+			if (this.hasClass(this.el, classname)) {
+				callback.apply(null, args);
 			};
-		};
-		return false;
-	};
-	Exe.prototype.given = function (classname, callback) {
-		if (this.hasClass(classname)) {
-			callback();
-		};
-		return this;
+			return this;
+		}
 	};
 	
-	context['Contexe'] = Exe;
+	context['Contexe'] = Contexe;
 	return context;
 }(this, document);
