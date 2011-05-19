@@ -48,7 +48,7 @@ Apply arguments to your callback:
       .given('awesome', totally, ['awesome']); // "Totally awesome!"
       .given('lame', totally, ['lame']); // "Totally lame!"
 
-## Technical Things
+## Technical things
 
 ### `Contexe()`
 
