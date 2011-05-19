@@ -31,7 +31,7 @@ Create a new Contexe instance, give it the tag you want to test against:
     
 Too much typing? Do it the lazy way:
 
-  Contexe('body').given('my-context-class', function() {});
+    Contexe('body').given('my-context-class', function() {});
 
 Chain given's together:
 
@@ -50,7 +50,7 @@ Apply arguments to your callback:
 
 ## Technical Things
 
-### Contexe()
+### `Contexe()`
 
 Contexe can take three values:
 
