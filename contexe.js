@@ -3,7 +3,9 @@
  * http://github.com/gordonbrander/contexe
  * @author Gordon Brander
  * @version 0.1
- * Released under the terms of both MIT and GNU GPL License
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
  */
 !function (context, doc) {
 	Contexe = function (element) {
