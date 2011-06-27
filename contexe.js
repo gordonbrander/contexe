@@ -44,6 +44,8 @@
 		},
 		
 		given: function (classname, callback, args) {
+			/* @bugfix - IE will error if no args arguement is passed. */
+			args = args || [];
 			if (this.hasClass(this.el, classname)) {
 				callback.apply(null, args);
 			};
